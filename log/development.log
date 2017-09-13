@@ -61,3 +61,31 @@ Migrating to CreateItems (20170907023322)
   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
   [1m[36mList Load (0.2ms)[0m  [1m[34mSELECT  "lists".* FROM "lists" ORDER BY "lists"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
   [1m[36mItem Load (0.2ms)[0m  [1m[34mSELECT  "items".* FROM "items" ORDER BY "items"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.5ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["username", "Susan"], ["email", "susan@email.com"], ["password", "password"], ["created_at", "2017-09-13 04:01:47.108318"], ["updated_at", "2017-09-13 04:01:47.108318"]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+
+Started GET "/api/users/" for 127.0.0.1 at 2017-09-12 22:38:57 -0700
+Processing by Api::UsersController#index as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Susan"], ["password", "password"]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.22ms)
+Completed 200 OK in 2ms (Views: 0.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/api/users/" for 127.0.0.1 at 2017-09-12 22:42:09 -0700
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::UsersController#index as JSON
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.51ms)
+Completed 200 OK in 16ms (Views: 4.5ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/api/users/" for 127.0.0.1 at 2017-09-12 22:55:02 -0700
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::UsersController#index as JSON
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+Completed 500 Internal Server Error in 79ms (ActiveRecord: 0.7ms)

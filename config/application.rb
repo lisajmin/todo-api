@@ -30,5 +30,6 @@ module TodoApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    config.action_controller.per_form_csrf_tokens = true
   end
 end
