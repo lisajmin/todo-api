@@ -89,3 +89,405 @@ Started GET "/api/users/" for 127.0.0.1 at 2017-09-12 22:55:02 -0700
 Processing by Api::UsersController#index as JSON
   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
 Completed 500 Internal Server Error in 79ms (ActiveRecord: 0.7ms)
+Started POST "/api/users/" for 127.0.0.1 at 2017-09-18 19:52:08 -0700
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::UsersController#create as JSON
+  Parameters: {"user"=>{"username"=>"Sterling", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "username"], ["password", "password"]]
+Filter chain halted as :authenticated? rendered or redirected
+Completed 401 Unauthorized in 7ms (ActiveRecord: 0.6ms)
+
+
+Started POST "/api/users/" for 127.0.0.1 at 2017-09-18 19:53:08 -0700
+Processing by Api::UsersController#create as JSON
+  Parameters: {"user"=>{"username"=>"Sterling", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("username", "password", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["username", "Sterling"], ["password", "Archer"], ["created_at", "2017-09-19 02:53:08.776231"], ["updated_at", "2017-09-19 02:53:08.776231"]]
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (0.32ms)
+Completed 200 OK in 20ms (Views: 8.5ms | ActiveRecord: 1.8ms)
+
+
+Started POST "/api/users/1/lists" for 127.0.0.1 at 2017-09-18 19:59:47 -0700
+Processing by Api::ListsController#create as JSON
+  Parameters: {"list"=>{"name"=>"Things to do today", "private"=>"true"}, "user_id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+Completed 400 Bad Request in 14ms (ActiveRecord: 0.8ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: item):
+  
+app/controllers/api/lists_controller.rb:17:in `item_params'
+app/controllers/api/lists_controller.rb:5:in `create'
+Started POST "/api/users/1/lists" for 127.0.0.1 at 2017-09-18 20:01:56 -0700
+Processing by Api::ListsController#create as JSON
+  Parameters: {"list"=>{"name"=>"Things to do today", "private"=>"true"}, "user_id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+Completed 500 Internal Server Error in 78ms (ActiveRecord: 0.8ms)
+
+
+  
+NameError (undefined local variable or method `list_params' for #<Api::ListsController:0x007fa02ee29ef8>
+Did you mean?  item_params):
+  
+app/controllers/api/lists_controller.rb:5:in `create'
+Started POST "/api/users/1/lists" for 127.0.0.1 at 2017-09-18 20:02:18 -0700
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::ListsController#create as JSON
+  Parameters: {"list"=>{"name"=>"Things to do today", "private"=>"true"}, "user_id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+Completed 500 Internal Server Error in 79ms (ActiveRecord: 0.7ms)
+
+
+  
+NameError (undefined local variable or method `list_params' for #<Api::ListsController:0x007f8b7bf55fd8>
+Did you mean?  item_params):
+  
+app/controllers/api/lists_controller.rb:5:in `create'
+Started POST "/api/users/1/lists" for 127.0.0.1 at 2017-09-18 20:02:50 -0700
+Processing by Api::ListsController#create as JSON
+  Parameters: {"list"=>{"name"=>"Things to do today", "private"=>"true"}, "user_id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.07ms)
+Completed 422 Unprocessable Entity in 30ms (Views: 5.6ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-09-18 20:03:38 -0700
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+  
+actionpack (5.1.3) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.3) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.3) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.3) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.3) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.3) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.3) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.3) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.3) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/api/users/" for 127.0.0.1 at 2017-09-18 20:04:17 -0700
+Processing by Api::UsersController#index as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.53ms)
+Completed 200 OK in 8ms (Views: 4.6ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/api/users/1/lists" for 127.0.0.1 at 2017-09-18 20:06:00 -0700
+Processing by Api::ListsController#create as JSON
+  Parameters: {"list"=>{"name"=>"Things to do today", "private"=>"true"}, "user_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.09ms)
+Completed 422 Unprocessable Entity in 3ms (Views: 0.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/api/users/1/" for 127.0.0.1 at 2017-09-18 20:13:21 -0700
+  
+AbstractController::ActionNotFound (The action 'show' could not be found for Api::UsersController):
+  
+actionpack (5.1.3) lib/abstract_controller/base.rb:119:in `process'
+actionpack (5.1.3) lib/action_controller/metal.rb:189:in `dispatch'
+actionpack (5.1.3) lib/action_controller/metal.rb:253:in `dispatch'
+actionpack (5.1.3) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (5.1.3) lib/action_dispatch/routing/route_set.rb:31:in `serve'
+actionpack (5.1.3) lib/action_dispatch/journey/router.rb:46:in `block in serve'
+actionpack (5.1.3) lib/action_dispatch/journey/router.rb:33:in `each'
+actionpack (5.1.3) lib/action_dispatch/journey/router.rb:33:in `serve'
+actionpack (5.1.3) lib/action_dispatch/routing/route_set.rb:834:in `call'
+rack (2.0.3) lib/rack/etag.rb:25:in `call'
+rack (2.0.3) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.3) lib/rack/head.rb:12:in `call'
+activerecord (5.1.3) lib/active_record/migration.rb:556:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+activesupport (5.1.3) lib/active_support/callbacks.rb:97:in `run_callbacks'
+actionpack (5.1.3) lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.3) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.3) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.3) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.3) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.3) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.3) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.3) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.3) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/api/users/1/" for 127.0.0.1 at 2017-09-18 20:14:08 -0700
+  
+AbstractController::ActionNotFound (The action 'show' could not be found for Api::UsersController):
+  
+actionpack (5.1.3) lib/abstract_controller/base.rb:119:in `process'
+actionpack (5.1.3) lib/action_controller/metal.rb:189:in `dispatch'
+actionpack (5.1.3) lib/action_controller/metal.rb:253:in `dispatch'
+actionpack (5.1.3) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (5.1.3) lib/action_dispatch/routing/route_set.rb:31:in `serve'
+actionpack (5.1.3) lib/action_dispatch/journey/router.rb:46:in `block in serve'
+actionpack (5.1.3) lib/action_dispatch/journey/router.rb:33:in `each'
+actionpack (5.1.3) lib/action_dispatch/journey/router.rb:33:in `serve'
+actionpack (5.1.3) lib/action_dispatch/routing/route_set.rb:834:in `call'
+rack (2.0.3) lib/rack/etag.rb:25:in `call'
+rack (2.0.3) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.3) lib/rack/head.rb:12:in `call'
+activerecord (5.1.3) lib/active_record/migration.rb:556:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+activesupport (5.1.3) lib/active_support/callbacks.rb:97:in `run_callbacks'
+actionpack (5.1.3) lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.3) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.3) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.3) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.3) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.3) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.3) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.3) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.3) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started POST "/api/users/1/lists" for 127.0.0.1 at 2017-09-18 20:17:05 -0700
+Processing by Api::ListsController#create as JSON
+  Parameters: {"list"=>{"name"=>"Things to do today", "private"=>"true"}, "user_id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.07ms)
+Completed 422 Unprocessable Entity in 24ms (Views: 2.2ms | ActiveRecord: 1.5ms)
+
+
+Started POST "/api/users/1/lists" for 127.0.0.1 at 2017-09-18 20:17:46 -0700
+Processing by Api::ListsController#create as JSON
+  Parameters: {"list"=>{"name"=>"Things to do today", "private"=>"true"}, "user_id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.09ms)
+Completed 422 Unprocessable Entity in 20ms (Views: 2.0ms | ActiveRecord: 1.3ms)
+
+
+Started POST "/api/users/1/lists" for 127.0.0.1 at 2017-09-18 20:24:14 -0700
+Processing by Api::ListsController#create as JSON
+  Parameters: {"list"=>{"name"=>"Things to do today", "private"=>"true"}, "user_id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "lists" ("name", "private", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Things to do today"], ["private", "t"], ["created_at", "2017-09-19 03:24:14.653324"], ["updated_at", "2017-09-19 03:24:14.653324"]]
+  [1m[35m (1.5ms)[0m  [1m[36mcommit transaction[0m
+Completed 500 Internal Server Error in 108ms (ActiveRecord: 3.3ms)
+
+
+  
+NameError (undefined local variable or method `item' for #<Api::ListsController:0x007f8b7d9bb198>):
+  
+app/controllers/api/lists_controller.rb:8:in `create'
+Started POST "/api/users/1/lists" for 127.0.0.1 at 2017-09-18 20:24:47 -0700
+Processing by Api::ListsController#create as JSON
+  Parameters: {"list"=>{"name"=>"Things to do today", "private"=>"true"}, "user_id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "lists" ("name", "private", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Things to do today"], ["private", "t"], ["created_at", "2017-09-19 03:24:47.334223"], ["updated_at", "2017-09-19 03:24:47.334223"]]
+  [1m[35m (1.6ms)[0m  [1m[36mcommit transaction[0m
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (0.33ms)
+Completed 200 OK in 25ms (Views: 2.5ms | ActiveRecord: 3.2ms)
+
+
+Started POST "/api/lists/3/items" for 127.0.0.1 at 2017-09-18 20:33:14 -0700
+Processing by Api::ItemsController#create as JSON
+  Parameters: {"item"=>{"name"=>"Dance if you want to"}, "list_id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "items" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Dance if you want to"], ["created_at", "2017-09-19 03:33:14.243397"], ["updated_at", "2017-09-19 03:33:14.243397"]]
+  [1m[35m (1.5ms)[0m  [1m[36mcommit transaction[0m
+[active_model_serializers] Rendered ItemSerializer with ActiveModelSerializers::Adapter::Attributes (0.26ms)
+Completed 200 OK in 28ms (Views: 4.5ms | ActiveRecord: 3.4ms)
+
+
+Started POST "/api/users/" for 127.0.0.1 at 2017-09-18 20:34:33 -0700
+Processing by Api::UsersController#create as JSON
+  Parameters: {"user"=>{"username"=>"Esther"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["username", "Esther"], ["created_at", "2017-09-19 03:34:33.369480"], ["updated_at", "2017-09-19 03:34:33.369480"]]
+  [1m[35m (2.2ms)[0m  [1m[36mcommit transaction[0m
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (0.23ms)
+Completed 200 OK in 8ms (Views: 2.1ms | ActiveRecord: 2.6ms)
+
+
+Started POST "/api/users/" for 127.0.0.1 at 2017-09-18 20:37:45 -0700
+Processing by Api::UsersController#create as JSON
+  Parameters: {"user"=>{"username"=>"Anne"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["username", "Anne"], ["created_at", "2017-09-19 03:37:45.117797"], ["updated_at", "2017-09-19 03:37:45.117797"]]
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (0.21ms)
+Completed 200 OK in 14ms (Views: 1.8ms | ActiveRecord: 2.5ms)
+
+
+Started POST "/api/lists/3/items" for 127.0.0.1 at 2017-09-18 21:09:28 -0700
+Processing by Api::ItemsController#create as JSON
+  Parameters: {"item"=>{"name"=>""}, "list_id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "items" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", ""], ["created_at", "2017-09-19 04:09:28.064601"], ["updated_at", "2017-09-19 04:09:28.064601"]]
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+[active_model_serializers] Rendered ItemSerializer with ActiveModelSerializers::Adapter::Attributes (0.16ms)
+Completed 200 OK in 21ms (Views: 1.8ms | ActiveRecord: 3.0ms)
+
+
+Started POST "/api/users/" for 127.0.0.1 at 2017-09-18 21:21:49 -0700
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::UsersController#create as JSON
+  Parameters: {"user"=>{"username"=>"Andrew"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.11ms)
+Completed 422 Unprocessable Entity in 17ms (Views: 2.9ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/api/users/1/lists" for 127.0.0.1 at 2017-09-18 21:26:22 -0700
+Processing by Api::ListsController#create as JSON
+  Parameters: {"list"=>{"name"=>""}, "user_id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.06ms)
+Completed 422 Unprocessable Entity in 20ms (Views: 2.0ms | ActiveRecord: 1.2ms)
+
+
+Started POST "/api/lists/3/items" for 127.0.0.1 at 2017-09-18 21:27:16 -0700
+Processing by Api::ItemsController#create as JSON
+  Parameters: {"item"=>{"name"=>""}, "list_id"=>"3"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.08ms)
+Completed 422 Unprocessable Entity in 9ms (Views: 0.4ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/api/users" for 127.0.0.1 at 2017-09-18 21:28:26 -0700
+Processing by Api::UsersController#index as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.58ms)
+Completed 200 OK in 8ms (Views: 5.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/api/users/" for 127.0.0.1 at 2017-09-18 21:29:12 -0700
+Processing by Api::UsersController#index as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.47ms)
+Completed 200 OK in 4ms (Views: 1.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/api/users/" for 127.0.0.1 at 2017-09-18 21:30:12 -0700
+Processing by Api::UsersController#index as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.39ms)
+Completed 200 OK in 2ms (Views: 1.1ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2017-09-18 21:31:12 -0700
+Processing by Api::UsersController#create as JSON
+  Parameters: {"user"=>{"username"=>"Andrew"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.06ms)
+Completed 422 Unprocessable Entity in 3ms (Views: 0.3ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2017-09-18 21:31:49 -0700
+Processing by Api::UsersController#create as JSON
+  Parameters: {"user"=>{"password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.06ms)
+Completed 422 Unprocessable Entity in 3ms (Views: 0.4ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/api/users/1/lists" for 127.0.0.1 at 2017-09-18 21:34:10 -0700
+Processing by Api::ListsController#create as JSON
+  Parameters: {"list"=>{"name"=>""}, "user_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.06ms)
+Completed 422 Unprocessable Entity in 4ms (Views: 0.7ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/api/users/1/lists" for 127.0.0.1 at 2017-09-18 21:35:05 -0700
+Processing by Api::ListsController#create as JSON
+  Parameters: {"list"=>{"name"=>"Weekly todo list"}, "user_id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "lists" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Weekly todo list"], ["created_at", "2017-09-19 04:35:05.358107"], ["updated_at", "2017-09-19 04:35:05.358107"]]
+  [1m[35m (1.5ms)[0m  [1m[36mcommit transaction[0m
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (0.18ms)
+Completed 200 OK in 7ms (Views: 1.8ms | ActiveRecord: 2.1ms)
+
+
+Started POST "/api/lists/4/items" for 127.0.0.1 at 2017-09-18 21:39:43 -0700
+Processing by Api::ItemsController#create as JSON
+  Parameters: {"item"=>{"name"=>""}, "list_id"=>"4"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.05ms)
+Completed 422 Unprocessable Entity in 3ms (Views: 0.4ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/api/lists/4/items" for 127.0.0.1 at 2017-09-18 21:40:36 -0700
+Processing by Api::ItemsController#create as JSON
+  Parameters: {"item"=>{"name"=>"Finish todo api project"}, "list_id"=>"4"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? AND "users"."password" = ?[0m  [["username", "Lisa"], ["password", "password"]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "items" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Finish todo api project"], ["created_at", "2017-09-19 04:40:36.178919"], ["updated_at", "2017-09-19 04:40:36.178919"]]
+  [1m[35m (1.6ms)[0m  [1m[36mcommit transaction[0m
+[active_model_serializers] Rendered ItemSerializer with ActiveModelSerializers::Adapter::Attributes (0.17ms)
+Completed 200 OK in 8ms (Views: 1.7ms | ActiveRecord: 2.4ms)
+
+
