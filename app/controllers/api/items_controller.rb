@@ -1,8 +1,15 @@
 class Api::ItemsController < ApiController
   before_action :authenticated?
+  before_action :set_list
+
+  def index
+    items = @list.items
+    render json: items, each_serializer: ItemSerializer
+  end
 
   def create
     item = Item.new(item_params)
+    item.list_id = @list.id
 
     if item.save
       render json: item
@@ -24,6 +31,10 @@ class Api::ItemsController < ApiController
 
   def item_params
     params.require(:item).permit(:name, :completed)
+  end
+
+  def set_list
+    @list = List.find(params[:list_id])
   end
 
 end

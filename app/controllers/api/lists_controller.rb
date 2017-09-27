@@ -1,8 +1,15 @@
 class Api::ListsController < ApiController
   before_action :authenticated?
+  before_action :set_user
+
+  def index
+    lists = @user.lists
+    render json: lists, each_serializer: ListSerializer
+  end
 
   def create
     list = List.new(list_params)
+    list.user_id = @user.id
 
     if list.save
       render json: list
@@ -34,6 +41,10 @@ class Api::ListsController < ApiController
 
   def list_params
     params.require(:list).permit(:name, :private)
+  end
+
+  def set_user
+    @user = User.find(params[:user_id])
   end
 
 end
